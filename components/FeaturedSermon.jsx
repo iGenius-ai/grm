@@ -23,13 +23,11 @@ export default function FeaturedSermon() {
       }
     })
 
-    tl.from(section.querySelectorAll('.animate-in'), {
-      opacity: 0,
-      y: 30,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: 'power3.out',
-    })
+    tl.fromTo(
+      section.querySelectorAll('.animate-in'), 
+      { opacity: 0, y: 30 }, 
+      { opacity: 1, y: 0, stagger: 0.2, duration: 0.8, ease: 'power3.out' }
+    )
 
     return () => {
       tl.kill()
@@ -38,10 +36,35 @@ export default function FeaturedSermon() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12">
-          <motion.div 
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="font-bold mb-8 sm:mb-12 text-center relative"
+        >
+          <h1 className="absolute inset-0 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-purple-900 flex items-center justify-center"
+              style={{
+                WebkitTextStroke: '1px #FFFFFF29',
+                textStroke: '1px #FFFFFF29',
+                textShadow: 
+                  '-1px -1px 0 #FFFFFF19, 1px -1px 0 #FFFFFF19, -1px 1px 0 #FFFFFF19, 1px 1px 0 #FFFFFF19, ' +
+                  '0px 4px 4px rgba(0,0,0,0.1)'
+              }}>
+            From the Altar
+          </h1>
+          <h2 className="relative text-3xl sm:text-4xl md:text-5xl text-gray-100 z-10" style={{
+            textShadow:
+              '-1px -1px 0 #FFFFFF19, 1px -1px 0 #FFFFFF19, -1px 1px 0 #FFFFFF19, 1px 1px 0 #FFFFFF19, ' +
+              '0px 4px 4px rgba(0,0,0,0.1)'
+            }}
+          >
+            Latest Sermon
+          </h2>
+        </motion.div>
+        <div className="flex flex-col md:flex-row md:space-y-0 md:space-x-12 items-center space-y-8">
+          <motion.div
             className="w-full md:w-1/2 relative rounded-lg overflow-hidden shadow-xl"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -57,28 +80,29 @@ export default function FeaturedSermon() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-center">
               <motion.button
-                className="bg-white/90 rounded-full p-4 shadow-lg"
+                className="bg-white/90 rounded-full p-3 sm:p-4 shadow-lg"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-purple-700">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 sm:w-8 sm:h-8 text-purple-700">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
                 </svg>
               </motion.button>
             </div>
           </motion.div>
-          <div className="w-full md:w-1/2 space-y-6">
-            <h2 className="animate-in text-sm font-semibold text-white tracking-wider uppercase">LATEST SERMON</h2>
-            <h3 className="animate-in text-4xl font-bold text-gray-95">God is Love</h3>
-            <p className="animate-in text-lg text-gray-100">by Ptr. Johnson</p>
-            <p className="animate-in text-xl font-medium text-gray-200">&quots;If ye love Me, keep My Commandments.&quots;</p>
-            <p className="animate-in text-gray-200 leading-relaxed">
+
+          <div className="w-full md:w-1/2 space-y-4 sm:space-y-6">
+            <h2 className="animate-in text-sm font-bold text-white tracking-wider uppercase">LATEST SERMON</h2>
+            <h3 className="animate-in text-3xl sm:text-4xl font-bold text-gray-95">God is Love</h3>
+            <p className="animate-in text-base sm:text-lg text-gray-100">by <b>Rev. Ephraim G. N. Ifionu</b></p>
+            <p className="animate-in text-lg sm:text-xl font-medium text-gray-200">&quot;If ye love Me, keep My Commandments.&quot;</p>
+            <p className="animate-in text-gray-200 text-base sm:text-lg leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eaque, nisi Lorem ipsum dolor sit amet,
               consectetur adipisicing elit. Odit nobis magni eaque velit eum, id rem eveniet dolor possimus voluptas..
             </p>
             <motion.a
               href="#"
-              className="animate-in inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition-colors duration-300"
+              className="bg-gray-100 px-4 py-2 rounded-full animate-in inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition-colors duration-300"
               whileHover={{ x: 5 }}
             >
               WATCH VIDEO
