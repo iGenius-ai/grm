@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.4",
+    "boxicons": "^2.1.4",
     "framer-motion": "^11.2.11",
     "gsap": "^3.12.5",
     "next": "14.2.4",

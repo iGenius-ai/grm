@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
@@ -41,7 +42,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="py-12 sm:py-16 md:py-24 overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-24 overflow-hidden bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -49,56 +50,32 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="font-bold mb-8 sm:mb-12 text-center relative"
         >
-          <h1 className="absolute inset-0 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-purple-900 flex items-center justify-center"
+          <h1 className="absolute inset-0 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gray-200 flex items-center justify-center"
               style={{
                 WebkitTextStroke: '1px #FFFFFF29',
                 textStroke: '1px #FFFFFF29',
-                textShadow:
+                textShadow: 
                   '-1px -1px 0 #FFFFFF19, 1px -1px 0 #FFFFFF19, -1px 1px 0 #FFFFFF19, 1px 1px 0 #FFFFFF19, ' +
                   '0px 4px 4px rgba(0,0,0,0.1)'
               }}>
-            God&apos;s Goodness
+            Testimonials
           </h1>
-          <h2 className="relative text-3xl sm:text-4xl md:text-5xl text-gray-100 z-10"
-            style={{
-              textShadow:
-                '-1px -1px 0 #FFFFFF19, 1px -1px 0 #FFFFFF19, -1px 1px 0 #FFFFFF19, 1px 1px 0 #FFFFFF19, ' +
-                '0px 4px 4px rgba(0,0,0,0.1)'
+          <h2 className="relative text-3xl sm:text-4xl md:text-5xl text-purple-950 z-10" style={{
+            textShadow:
+              '-1px -1px 0 #FFFFFF19, 1px -1px 0 #FFFFFF19, -1px 1px 0 #FFFFFF19, 1px 1px 0 #FFFFFF19, ' +
+              '0px 4px 4px rgba(0,0,0,0.1)'
             }}
           >
-            Testimonies
+            What Our Community Says
           </h2>
         </motion.div>
-        <div className="max-w-5xl mx-auto relative">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-col md:flex-row items-center rounded-lg shadow-xl overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100"
-            >
-              <div className="w-full md:w-1/3 relative h-48 sm:h-64 md:h-96">
-                <Image
-                  src={testimonials[currentIndex].image}
-                  alt={testimonials[currentIndex].name}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div className="w-full md:w-2/3 p-6 sm:p-8">
-                <p className="text-lg sm:text-xl mb-4 text-gray-700 italic">&quot;{testimonials[currentIndex].text}&quot;</p>
-                <p className="font-semibold text-gray-900">- {testimonials[currentIndex].name}</p>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2">
+        <div className="relative flex items-center justify-center">
+          <div className="absolute left-10 top-1/2 -translate-y-1/2 -translate-x-1/2">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handlePrev}
-              className="p-2 sm:p-3 rounded-full bg-white text-blue-500 shadow-lg hover:bg-blue-100 transition-colors"
+              className="p-2 sm:p-3 rounded-full bg-white text-blue-500 shadow-md shadow-gray-400 hover:bg-blue-100 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 sm:w-6 sm:h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -106,28 +83,43 @@ export default function Testimonials() {
             </motion.button>
           </div>
 
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2">
+          <AnimatePresence>
+            {testimonials.map((testimonial, index) => (
+              index === currentIndex && (
+                <motion.div
+                  key={testimonial.name}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.6 }}
+                  className="w-full md:w-2/3 lg:w-1/2 bg-white p-6 sm:p-8 rounded-lg shadow-lg flex flex-col items-center text-center space-y-4"
+                >
+                  <Image
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    width={100}
+                    height={100}
+                    className="rounded-full shadow-md"
+                  />
+                  <blockquote className="text-gray-800 font-medium italic">&ldquo;{testimonial.text}&rdquo;</blockquote>
+                  <p className="font-semibold text-purple-950">{testimonial.name}</p>
+                </motion.div>
+              )
+            ))}
+          </AnimatePresence>
+
+          <div className="absolute right-10 top-1/2 -translate-y-1/2 translate-x-1/2">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handleNext}
-              className="p-2 sm:p-3 rounded-full bg-white text-blue-500 shadow-lg hover:bg-blue-100 transition-colors"
+              className="p-2 sm:p-3 rounded-full bg-white text-blue-500 shadow-md shadow-gray-400 hover:bg-blue-100 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 sm:w-6 sm:h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
               </svg>
             </motion.button>
           </div>
-        </div>
-        <div className="flex justify-center mt-4 sm:mt-6 space-x-2">
-          {testimonials.map((_, index) => (
-            <motion.button
-              key={index}
-              whileHover={{ scale: 1.2 }}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'}`}
-            />
-          ))}
         </div>
       </div>
     </section>

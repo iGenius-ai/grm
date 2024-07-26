@@ -39,7 +39,7 @@ export default function Navigation() {
       >
         <div className="container mx-auto flex justify-between items-center">
           <Link href="/" className={`text-2xl font-bold ${isScrolled ? "text-purple-900" : "text-gray-100"} flex items-center`}>
-            <Image src={"/logo.png"} alt='Church Logo' width={60} height={60} />
+            <Image src={"/logo.png"} alt='Church Logo' width={60} height={60} objectFit='center' />
             <div className='uppercase'>
               <p className='text-sm'>Glory Restoration</p>
               <p className='text-lg'>Ministries Int&apos;l</p>
